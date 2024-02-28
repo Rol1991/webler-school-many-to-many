@@ -1,7 +1,11 @@
 package hu.webler.weblerschoolmanytomany.entity;
 
 import hu.webler.weblerschoolmanytomany.entity.base.Identifier;
+import hu.webler.weblerschoolmanytomany.entity.base.Person;
+import hu.webler.weblerschoolmanytomany.value.Status;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,15 +20,13 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student extends Identifier {
-
-    private String firstname;
-    private String midName;
-    private String lastName;
-    private String cell;
-    private String email;
-    private LocalDate dateOffBirth;
+public class Student extends Person {
 
     @CreationTimestamp
     private LocalDateTime registrationDate = LocalDateTime.now();
+
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.INACTIVE;
+
+    private boolean isPaid = false;
 }
