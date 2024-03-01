@@ -19,7 +19,7 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Object addNewCourse(Course course) {
+    public Course addNewCourse(Course course) {
         return courseRepository.save(course);
     }
 }
