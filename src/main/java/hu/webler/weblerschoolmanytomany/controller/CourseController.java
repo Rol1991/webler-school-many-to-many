@@ -4,7 +4,9 @@ package hu.webler.weblerschoolmanytomany.controller;
 import hu.webler.weblerschoolmanytomany.entity.Course;
 import hu.webler.weblerschoolmanytomany.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +38,12 @@ public class CourseController {
         return courseService.addNewCourse(course);
     }
 
-    @DeleteExchange("/courses/{id}")
+    @DeleteMapping("/courses/{id}")
     public void deleteCourse(@PathVariable Long id) {courseService.deleteCourse(id);}
+
+    @PatchMapping("/courses/update")
+    public Course patchCourse(@PathVariable Long id, @RequestBody Course course) {
+        return  courseService.updateCourse(id, course);
+    }
 }
 
