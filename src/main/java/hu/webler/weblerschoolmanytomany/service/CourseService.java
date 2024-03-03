@@ -24,11 +24,25 @@ public class CourseService {
     }
 
     public Course addNewCourse(Course course) {
+
+        course.setDescription(course.getDescription());
+        course.setName(course.getName());
+        course.setStartDate(course.getStartDate());
+        course.setEndDate(course.getEndDate());
+        course.setStudents(course.getStudents());
+        course.setSchool(course.getSchool());
+        course.setTeacher(course.getTeacher());
         return courseRepository.save(course);
     }
 
     public void deleteCourse(Long id) {
         Course course = findCourseById(id);
         courseRepository.delete(course);
+    }
+
+    public Course updateCourse(Long id, Course course) {
+        Course existingCourse = courseRepository.findCourseById(id);
+        existingCourse.setName(course.getName());
+        return courseRepository.save(existingCourse);
     }
 }
