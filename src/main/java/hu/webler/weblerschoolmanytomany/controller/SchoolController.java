@@ -8,14 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class Schoolcontroller {
+public class SchoolController {
 
     private final SchoolRepository schoolRepository;
 
     @GetMapping("/schools")
-    public List<School> renderAllSchools() { return schoolRepository.findAll();}
+    public List<School> renderSchool() { return schoolRepository.findAll();}
+
 }
