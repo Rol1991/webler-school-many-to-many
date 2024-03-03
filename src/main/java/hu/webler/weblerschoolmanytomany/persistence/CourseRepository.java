@@ -8,4 +8,6 @@ import java.io.Writer;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
+
+    Course findCourseById(Long id);
 }
