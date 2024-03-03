@@ -1,6 +1,5 @@
 package hu.webler.weblerschoolmanytomany.entity;
 
-import hu.webler.weblerschoolmanytomany.entity.base.Person;
 import hu.webler.weblerschoolmanytomany.value.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
