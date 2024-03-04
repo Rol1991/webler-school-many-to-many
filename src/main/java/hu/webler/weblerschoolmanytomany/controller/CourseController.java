@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.service.annotation.DeleteExchange;
 
 import java.util.List;
 
@@ -34,16 +33,15 @@ public class CourseController {
     }
 
     @PostMapping("/courses/add")
-    public Course addNewCourse(@RequestBody Course course) {
-        return courseService.addNewCourse(course);
+    public Course addCourse(@RequestBody Course course) {
+        return courseService.addCourse(course);
     }
 
     @DeleteMapping("/courses/{id}")
     public void deleteCourse(@PathVariable Long id) {courseService.deleteCourse(id);}
 
     @PatchMapping("/courses/update")
-    public Course patchCourse(@PathVariable Long id, @RequestBody Course course) {
-        return  courseService.updateCourse(id, course);
-    }
+    public Course patchCourse(@PathVariable Long id, @RequestBody Course course) {return courseService.updateCourse(id);}
+
 }
 

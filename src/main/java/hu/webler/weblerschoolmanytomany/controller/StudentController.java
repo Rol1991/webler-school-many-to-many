@@ -30,15 +30,13 @@ public class StudentController {
     public Student renderStudentById(Long id) {return studentService.findStudentById(id);}
 
     @PostMapping("students/{id}")
-    public Student postNewStudent(@RequestBody Student student) {
+    public Student postStudent(@RequestBody Student student) {
         return studentService.addNewStudent(student);
     }
 
-    @PatchMapping("/students/update")
-    public Student patchCourse(@PathVariable Long id,@RequestBody Student student) {
-        return studentService.updateStudent(id, student);
-    }
-
     @DeleteMapping("/students/{id}")
-    public void deleteStudent(@PathVariable Long id, @RequestBody Student student) {studentService.deleteStudents(id);}
+    public void deleteStudent(@PathVariable Long id) {studentService.deleteStudents(id);}
+
+    @PatchMapping("/students/update")
+    public Student patchStudent(@PathVariable Long id, @RequestBody Student student) {return studentService.updateStudent(id);}
 }
