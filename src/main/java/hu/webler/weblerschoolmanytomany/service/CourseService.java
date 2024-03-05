@@ -23,13 +23,12 @@ public class CourseService {
     }
 
     public Course findCourseById(Long id) {
-        Optional<Course> course = courseRepository.findById(id);
-        if (course.isPresent()) {
-            courseRepository.findById(id);
-        }
-        String message = String.format("Course with id %d not found", id);
-        log.info(message);
-        throw new NoSuchElementException(message);
+        return courseRepository.findCourseById(id)
+                .orElseThrow(() -> {
+                String message = String.format("Course with id %d not found", id);
+                        log.info(message);
+                        return new NoSuchElementException(message);
+                });
     }
 
     public Course addCourse(Course course) {
@@ -54,18 +53,13 @@ public class CourseService {
         throw new NoSuchElementException(message);
     }
 
-    public Course updateCourse(Long id) {
-        Optional<Course> course = courseRepository.findById(id);
-        if (course.isPresent()) {
-            Course existingCourse = course.get();
-            existingCourse.setName(existingCourse.getName());
-            existingCourse.setDescription(existingCourse.getDescription());
-            existingCourse.setStartDate(existingCourse.getStartDate());
-            existingCourse.setEndDate(existingCourse.getEndDate());
-            courseRepository.save(existingCourse);
+    public Course updateCourse(Long id, Course updateCourse) {
+        Course course = findCourseById(id);
+        course.setName(updateCourse.getName());
+        course.setDescription(updateCourse.getDescription());
+        course.setStartDate(updateCourse.getStartDate());
+        course.setEndDate(updateCourse.getEndDate());
+        return courseRepository.save(updateCourse);
         }
-        String message = String.format("Course with id %d not found", id);
-        log.info(message);
-        throw new NoSuchElementException(message);
-    }
+
 }

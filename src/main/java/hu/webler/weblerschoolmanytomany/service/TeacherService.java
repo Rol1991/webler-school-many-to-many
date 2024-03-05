@@ -21,25 +21,15 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
-    public Teacher addTeacher(Teacher teacher) {
-        teacher.setFirstname((teacher.getFirstname()));
-        teacher.setMidName(teacher.getMidName());
-        teacher.setLastName(teacher.getLastName());
-        teacher.setCell(teacher.getCell());
-        teacher.setEmail(teacher.getEmail());
-        teacher.setDateOffBirth(teacher.getDateOffBirth());
-        teacher.setName(teacher.getName());
-        teacher.setCourses(teacher.getCourses());
-        return teacherRepository.save(teacher);}
+    public Teacher addTeacher(Teacher teacher) {return teacherRepository.save(teacher);}
 
-    public Teacher getTeacherById(Long id) {
-        Optional<Teacher> teacher = teacherRepository.findById(id);
-        if (teacher.isPresent()) {
-            teacherRepository.findById(id);
-        }
-        String message = String.format("Teacher with id %d not found");
-        log.info(message);
-        throw new NoSuchElementException(message);
+    public Teacher findTeachersById(Long id) {
+        return teacherRepository.findTeachersById(id)
+                .orElseThrow(() -> {
+                    String message = String.format("Teacher with id %d was not found", id);
+                    log.info(message);
+                    throw new NoSuchElementException(message);
+                });
     }
 
 
@@ -52,5 +42,12 @@ public class TeacherService {
             log.info(message);
             throw new NoSuchElementException(message);
         }
+    }
+
+    public Teacher updateTeacher (Long id, Teacher updateTeacher) {
+        Teacher teacher = findTeachersById(id);
+        teacher.setName(updateTeacher.getName());
+        teacher.setCourses(updateTeacher.getCourses());
+        return teacherRepository.save(updateTeacher);
     }
 }

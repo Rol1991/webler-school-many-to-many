@@ -22,16 +22,17 @@ public class StudentService {
     }
 
     public Student findStudentById(Long id) {
-        Optional<Student> student = studentRepository.findById(id);
-        if (student.isPresent()) {
-            studentRepository.findById(id);
-        }
-        String message = String.format("Student with id %d not found", id);
-        log.info(message);
-        throw  new NoSuchElementException(message);
+        return studentRepository.findStudentById(id)
+                .orElseThrow(() -> {
+                    String message = String.format("Student with id %d was not found", id);
+                    log.info(message);
+                    throw new NoSuchElementException(message);
+                });
     }
 
-    public Student addNewStudent(Student student) {return studentRepository.save(student);}
+    public Student addNewStudent(Student student) {
+        return studentRepository.save(student);
+    }
 
     public void deleteStudents(long id) {
         Optional<Student> student = studentRepository.findById(id);
@@ -43,17 +44,14 @@ public class StudentService {
         throw new NoSuchElementException(message);
     }
 
-    public Student updateStudent(Long id) {
-        Optional<Student> student = studentRepository.findById(id);
-        if (student.isPresent()) {
-            Student existingStudent = student.get();
-            existingStudent.setFirstname(existingStudent.getFirstname());
-            existingStudent.setMidName(existingStudent.getMidName());
-            existingStudent.setLastName(existingStudent.getLastName());
-            studentRepository.save(existingStudent);
-        }
-        String message = String.format("Student with id %d not found");
-        log.info(message);
-        throw new NoSuchElementException(message);
+    public Student updateStudent(Long id, Student updateStudent) {
+        Student student = findStudentById(id);
+        student.setFirstname(updateStudent.getFirstname());
+        student.setMidName(updateStudent.getMidName());
+        student.setLastName(updateStudent.getLastName());
+        student.setCell(updateStudent.getCell());
+        student.setEmail(updateStudent.getEmail());
+        student.setDateOffBirth(updateStudent.getDateOffBirth());
+        return studentRepository.save(updateStudent);
     }
 }

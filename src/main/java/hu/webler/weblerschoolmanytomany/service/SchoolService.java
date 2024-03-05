@@ -20,14 +20,13 @@ public class SchoolService {
 
     public List<School> getSchool() {return schoolRepository.findAll();}
 
-    public School getSchoolById(Long id) {
-        Optional<School> school = schoolRepository.findById(id);
-        if (school.isPresent()) {
-            schoolRepository.findById(id);
-        }
-        String message = String.format("School with id %d not found", id);
-        log.info(message);
-        throw new NoSuchElementException(message);
+    public School findSchoolById(Long id) {
+        return schoolRepository.findSchoolById(id)
+                .orElseThrow(() -> {
+                    String message = String.format("School with id %d not found", id);
+                    log.info(message);
+                    return new NoSuchElementException(message);
+                });
     }
 
     public School addSchool(School school) {return schoolRepository.save(school);}
@@ -43,17 +42,11 @@ public class SchoolService {
         }
     }
 
-    public School updateSchool(Long id) {
-        Optional<School> school = schoolRepository.findById(id);
-        if (school.isPresent()) {
-            School existingSchool = school.get();
-            existingSchool.setName(existingSchool.getName());
-            existingSchool.setAddress(existingSchool.getAddress());
-            existingSchool.setCourses(existingSchool.getCourses());
-            schoolRepository.save(existingSchool);
-        }
-        String message = String.format("School with id %d not found", id);
-        log.info(message);
-        throw new NoSuchElementException(message);
+    public School updateSchool(Long id, School updateSchool) {
+        School school = findSchoolById(id);
+        school.setName(updateSchool.getName());
+        school.setAddress(updateSchool.getAddress());
+        school.setCourses(updateSchool.getCourses());
+        return schoolRepository.save(updateSchool);
     }
 }
