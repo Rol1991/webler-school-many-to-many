@@ -1,6 +1,7 @@
 package hu.webler.weblerschoolmanytomany.service;
 
 import hu.webler.weblerschoolmanytomany.entity.Course;
+import hu.webler.weblerschoolmanytomany.model.CourseCreateModel;
 import hu.webler.weblerschoolmanytomany.model.CourseModel;
 import hu.webler.weblerschoolmanytomany.persistence.CourseRepository;
 import hu.webler.weblerschoolmanytomany.util.Mapper;
@@ -37,16 +38,8 @@ public class CourseService {
                 });
     }
 
-    public Course addCourse(Course course) {
-
-        course.setDescription(course.getDescription());
-        course.setName(course.getName());
-        course.setStartDate(course.getStartDate());
-        course.setEndDate(course.getEndDate());
-        course.setStudents(course.getStudents());
-        course.setSchool(course.getSchool());
-        course.setTeacher(course.getTeacher());
-        return courseRepository.save(course);
+    public CourseModel createCourse(CourseCreateModel courseCreateModel) {
+        return Mapper.mapCourseEntityToCourseModel(courseRepository.save(Mapper.mapCourseCreateModelTCourseEntity(courseCreateModel)));
     }
 
     public void deleteCourse(Long id) {
