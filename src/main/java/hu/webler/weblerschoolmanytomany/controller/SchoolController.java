@@ -26,15 +26,12 @@ public class SchoolController {
         return schoolService.getSchool();
     }
 
-    @GetMapping("/schools/id")
-    public School renderSchoolsById(Long id) {return schoolService.getSchoolById(id);}
-
-    @PostMapping("/school/add")
+    @PostMapping("/schools")
     public School addSchool(@RequestBody School school) {return schoolService.addSchool(school);}
 
     @DeleteMapping("/schools/{id}")
     public void deleteSchool(@PathVariable Long id) { schoolService.deleteSchool(id);}
 
-    @PatchMapping("/schools/update")
-    public School patchSchool(@PathVariable Long id, @RequestBody School school) {return schoolService.updateSchool(id);}
+    @PatchMapping("/schools/{id}")
+    public School patchSchool(@PathVariable Long id, @RequestBody School school) {return schoolService.updateSchool(id, school);}
 }
