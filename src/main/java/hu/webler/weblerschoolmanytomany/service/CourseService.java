@@ -1,7 +1,9 @@
 package hu.webler.weblerschoolmanytomany.service;
 
 import hu.webler.weblerschoolmanytomany.entity.Course;
+import hu.webler.weblerschoolmanytomany.model.CourseModel;
 import hu.webler.weblerschoolmanytomany.persistence.CourseRepository;
+import hu.webler.weblerschoolmanytomany.util.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +21,11 @@ public class CourseService {
     private final CourseRepository courseRepository;
 
 
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+    public List<CourseModel> getAllCourses() {
+        return courseRepository.findAll()
+                .stream()
+                .map(Mapper::mapCourseEntityToCourseModel)
+                .collect(Collectors.toList());
     }
 
     public Course findCourseById(Long id) {
