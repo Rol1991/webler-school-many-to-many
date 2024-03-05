@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -21,9 +22,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Course extends Identifier {
 
+    @NonNull
     private String name;
+    @NonNull
     private String description;
+    @NonNull
     private LocalDate startDate;
+    @NonNull
     private LocalDate endDate;
 
     @ManyToOne
