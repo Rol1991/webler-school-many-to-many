@@ -26,9 +26,7 @@ public class Course extends Identifier {
     private String name;
     @NonNull
     private String description;
-    @NonNull
     private LocalDate startDate;
-    @NonNull
     private LocalDate endDate;
 
     @ManyToOne

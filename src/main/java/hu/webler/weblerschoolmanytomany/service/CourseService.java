@@ -3,6 +3,7 @@ package hu.webler.weblerschoolmanytomany.service;
 import hu.webler.weblerschoolmanytomany.entity.Course;
 import hu.webler.weblerschoolmanytomany.model.CourseCreateModel;
 import hu.webler.weblerschoolmanytomany.model.CourseModel;
+import hu.webler.weblerschoolmanytomany.model.CourseUpdateModel;
 import hu.webler.weblerschoolmanytomany.persistence.CourseRepository;
 import hu.webler.weblerschoolmanytomany.util.Mapper;
 import lombok.RequiredArgsConstructor;
@@ -52,13 +53,13 @@ public class CourseService {
         throw new NoSuchElementException(message);
     }
 
-    public Course updateCourse(Long id, Course updateCourse) {
+    public Course updateCourse(Long id, CourseUpdateModel courseUpdateModel) {
         Course course = findCourseById(id);
-        course.setName(updateCourse.getName());
-        course.setDescription(updateCourse.getDescription());
-        course.setStartDate(updateCourse.getStartDate());
-        course.setEndDate(updateCourse.getEndDate());
-        return courseRepository.save(updateCourse);
+        course.setName(courseUpdateModel.getName());
+        course.setDescription(courseUpdateModel.getDescription());
+        course.setStartDate(courseUpdateModel.getStartDate());
+        course.setEndDate(courseUpdateModel.getEndDate());
+        return courseRepository.save(course);
         }
 
 }

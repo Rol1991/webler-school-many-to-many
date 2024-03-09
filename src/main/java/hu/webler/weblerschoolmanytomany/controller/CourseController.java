@@ -4,6 +4,7 @@ package hu.webler.weblerschoolmanytomany.controller;
 import hu.webler.weblerschoolmanytomany.entity.Course;
 import hu.webler.weblerschoolmanytomany.model.CourseCreateModel;
 import hu.webler.weblerschoolmanytomany.model.CourseModel;
+import hu.webler.weblerschoolmanytomany.model.CourseUpdateModel;
 import hu.webler.weblerschoolmanytomany.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class CourseController {
         return ResponseEntity.status(200).body(courseService.getAllCourses());
     }
 
-    @GetMapping("/courses/Id")
+    @GetMapping("/courses/id")
     public Course renderCoursesById(Long id) {
         return courseService.findCourseById(id);
     }
@@ -44,7 +45,9 @@ public class CourseController {
     public void deleteCourse(@PathVariable Long id) {courseService.deleteCourse(id);}
 
     @PatchMapping("/courses/{id}")
-    public Course patchCourse(@PathVariable Long id, @RequestBody Course course) {return courseService.updateCourse(id, course);}
+    public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody CourseUpdateModel courseUpdateModel) {
+        return ResponseEntity.status(200).body(courseService.updateCourse(id, courseUpdateModel));
+    }
 
 }
 
