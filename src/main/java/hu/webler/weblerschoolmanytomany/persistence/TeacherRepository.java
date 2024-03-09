@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
-    Optional<Teacher> findTeachersById(Long id);
+    Optional<Teacher> findTeacherById(Long id);
 }
