@@ -38,7 +38,7 @@ public class StudentService {
                 .orElseThrow(() -> {
                     String message = String.format("Student with id %d was not found", id);
                     log.info(message);
-                    throw new NoSuchElementException(message);
+                    return new NoSuchElementException(message);
                 });
     }
 

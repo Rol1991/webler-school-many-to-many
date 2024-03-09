@@ -42,7 +42,6 @@ public class TeacherService {
                 });
     }
 
-
     public void deleteTeacher(Long id) {
         Optional<Teacher> teacher = teacherRepository.findById(id);
         if (teacher.isPresent()) {

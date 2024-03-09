@@ -1,6 +1,5 @@
 package hu.webler.weblerschoolmanytomany.model;
 
-import hu.webler.weblerschoolmanytomany.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
