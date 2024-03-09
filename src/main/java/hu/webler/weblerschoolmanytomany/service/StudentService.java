@@ -1,14 +1,23 @@
 package hu.webler.weblerschoolmanytomany.service;
 
 import hu.webler.weblerschoolmanytomany.entity.Student;
+import hu.webler.weblerschoolmanytomany.entity.Teacher;
+import hu.webler.weblerschoolmanytomany.model.StudentCreateModel;
+import hu.webler.weblerschoolmanytomany.model.StudentModel;
+import hu.webler.weblerschoolmanytomany.model.StudentUpdateModel;
 import hu.webler.weblerschoolmanytomany.persistence.StudentRepository;
+import hu.webler.weblerschoolmanytomany.util.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static hu.webler.weblerschoolmanytomany.util.Mapper.mapStudentCreateModelToStudentEntity;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +26,11 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public List<StudentModel> getAllStudents() {
+        return studentRepository.findAll()
+                .stream()
+                .map(Mapper::mapStudentEntityToStudentModel)
+                .collect(Collectors.toList());
     }
 
     public Student findStudentById(Long id) {
@@ -30,8 +42,8 @@ public class StudentService {
                 });
     }
 
-    public Student addNewStudent(Student student) {
-        return studentRepository.save(student);
+    public StudentModel createStudent(StudentCreateModel studentCreateModel) {
+        return Mapper.mapStudentEntityToStudentModel(studentRepository.save(Mapper.mapStudentCreateModelToStudentEntity(studentCreateModel)));
     }
 
     public void deleteStudents(long id) {
@@ -44,14 +56,14 @@ public class StudentService {
         throw new NoSuchElementException(message);
     }
 
-    public Student updateStudent(Long id, Student updateStudent) {
+    public Student updateStudent(Long id, StudentUpdateModel model) {
         Student student = findStudentById(id);
-        student.setFirstname(updateStudent.getFirstname());
-        student.setMidName(updateStudent.getMidName());
-        student.setLastName(updateStudent.getLastName());
-        student.setCell(updateStudent.getCell());
-        student.setEmail(updateStudent.getEmail());
-        student.setDateOffBirth(updateStudent.getDateOffBirth());
-        return studentRepository.save(updateStudent);
+        student.setFirstName(model.getFirstName());
+        student.setMidName(model.getMidName());
+        student.setLastName(model.getLastName());
+        student.setCell(model.getCell());
+        student.setEmail(model.getEmail());
+        student.setDateOffBirth(model.getDateOffBirth());
+        return studentRepository.save(student);
     }
 }
