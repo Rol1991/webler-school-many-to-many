@@ -40,7 +40,7 @@ public class CourseService {
     }
 
     public CourseModel createCourse(CourseCreateModel courseCreateModel) {
-        return Mapper.mapCourseEntityToCourseModel(courseRepository.save(Mapper.mapCourseCreateModelTCourseEntity(courseCreateModel)));
+        return Mapper.mapCourseEntityToCourseModel(courseRepository.save(Mapper.mapCourseCreateModelToCourseEntity(courseCreateModel)));
     }
 
     public void deleteCourse(Long id) {

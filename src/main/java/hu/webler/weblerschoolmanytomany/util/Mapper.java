@@ -28,7 +28,7 @@ public class Mapper {
         return model;
     }
 
-    public static Course mapCourseCreateModelTCourseEntity(CourseCreateModel model) {
+    public static Course mapCourseCreateModelToCourseEntity(CourseCreateModel model) {
         Course currentCourse = new Course();
         currentCourse.setName(model.getName());
         currentCourse.setDescription(model.getDescription());
