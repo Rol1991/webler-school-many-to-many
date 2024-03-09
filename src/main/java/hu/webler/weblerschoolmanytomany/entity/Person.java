@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 public class Person extends Identifier {
 
-    private String firstname;
+    private String firstName;
     private String midName;
     private String lastName;
     private String cell;
