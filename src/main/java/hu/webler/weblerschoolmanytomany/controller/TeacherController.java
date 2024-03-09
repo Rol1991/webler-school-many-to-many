@@ -36,7 +36,10 @@ public class TeacherController {
     }
 
     @DeleteMapping("/teachers/{id}")
-    public void deleteTeacher(@PathVariable Long id) {teacherService.deleteTeacher(id);}
+    public ResponseEntity<Void> deleteTeacher(@PathVariable Long id) {
+        teacherService.deleteTeacher(id);
+        return ResponseEntity.status(204).build();
+    }
 
     @PatchMapping("/teachers/{id}")
     public Teacher patchTeacher(@PathVariable Long id, @RequestBody TeacherUpdateModel teacherUpdateModel) {return teacherService.updateTeacher(id, teacherUpdateModel);}

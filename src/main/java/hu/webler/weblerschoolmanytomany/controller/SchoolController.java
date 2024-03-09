@@ -36,7 +36,10 @@ public class SchoolController {
     }
 
     @DeleteMapping("/schools/{id}")
-    public void deleteSchool(@PathVariable Long id) { schoolService.deleteSchool(id);}
+    public ResponseEntity<Void> deleteSchool(@PathVariable Long id) {
+        schoolService.deleteSchool(id);
+        return ResponseEntity.status(204).build();
+    }
 
     @PatchMapping("/schools/{id}")
     public ResponseEntity<School> updateSchool(@PathVariable Long id, @RequestBody SchoolUpdateModel schoolUpdateModel) {
