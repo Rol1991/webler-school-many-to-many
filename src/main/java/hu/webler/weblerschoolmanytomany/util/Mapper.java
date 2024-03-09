@@ -49,14 +49,14 @@ public class Mapper {
     }
 
     public static Student mapStudentCreateModelToStudentEntity(StudentCreateModel model) {
-        Student currentStudent = new Student();
-        currentStudent.setFirstName(model.getFirstName());
-        currentStudent.setMidName(model.getMidName());
-        currentStudent.setLastName(model.getLastName());
-        currentStudent.setEmail(model.getEmail());
-        currentStudent.setCell(model.getCell());
-        currentStudent.setDateOffBirth(model.getDateOffBirth());
-        return model;
+        Student student = new Student();
+        student.setFirstName(model.getFirstName());
+        student.setMidName(model.getMidName());
+        student.setLastName(model.getLastName());
+        student.setEmail(model.getEmail());
+        student.setCell(model.getCell());
+        student.setDateOffBirth(model.getDateOffBirth());
+        return student;
     }
 
 
