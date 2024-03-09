@@ -32,8 +32,8 @@ public class CourseController {
     }
 
     @GetMapping("/courses/id")
-    public Course renderCoursesById(Long id) {
-        return courseService.findCourseById(id);
+    public ResponseEntity<Course>  renderCoursesById(Long id) {
+        return ResponseEntity.status(200).body(courseService.findCourseById(id));
     }
 
     @PostMapping("/courses")
