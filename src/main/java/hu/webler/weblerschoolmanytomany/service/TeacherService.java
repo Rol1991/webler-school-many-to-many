@@ -33,8 +33,8 @@ public class TeacherService {
         return Mapper.mapTeacherEntityToTeacherModel(teacherRepository.save(Mapper.mapTeacherCreateModelToTeacherEntity(teacherCreateModel)));
         }
 
-    public Teacher findTeachersById(Long id) {
-        return teacherRepository.findTeachersById(id)
+    public Teacher findTeacherById(Long id) {
+        return teacherRepository.findTeacherById(id)
                 .orElseThrow( () -> {
                     String message = "Teacher with id %d not found" + id;
                     log.info(message);
@@ -55,7 +55,7 @@ public class TeacherService {
     }
 
     public Teacher updateTeacher (Long id, TeacherUpdateModel teacherUpdateModel) {
-        Teacher teacher = findTeachersById(id);
+        Teacher teacher = findTeacherById(id);
         teacher.setName(teacherUpdateModel.getName());
         teacher.setCourses(teacherUpdateModel.getCourses());
         return teacherRepository.save(teacher);

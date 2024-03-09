@@ -51,7 +51,7 @@ public class SchoolService {
         } else {
             String message = String.format("School with id %d not found", id);
             log.info(message);
-            throw new NoSuchElementException(message);
+            throw  new NoSuchElementException(message);
         }
     }
 
