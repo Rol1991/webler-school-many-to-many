@@ -1,6 +1,5 @@
 package hu.webler.weblerschoolmanytomany.model;
 
-import hu.webler.weblerschoolmanytomany.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentCreateModel extends Student {
+public class StudentCreateModel {
 
     private String firstName;
     private String midName;
