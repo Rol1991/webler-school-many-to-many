@@ -1,7 +1,11 @@
 package hu.webler.weblerschoolmanytomany.service;
 
 import hu.webler.weblerschoolmanytomany.entity.Teacher;
+import hu.webler.weblerschoolmanytomany.model.TeacherCreateModel;
+import hu.webler.weblerschoolmanytomany.model.TeacherModel;
+import hu.webler.weblerschoolmanytomany.model.TeacherUpdateModel;
 import hu.webler.weblerschoolmanytomany.persistence.TeacherRepository;
+import hu.webler.weblerschoolmanytomany.util.Mapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,11 +22,16 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
 
-    public List<Teacher> getAllTeachers() {
-        return teacherRepository.findAll();
+    public List<TeacherModel> getAllTeachers() {
+        return teacherRepository.findAll()
+                .stream()
+                .map(Mapper::mapTeacherEntityToTeacherModel)
+                .collect(Collectors.toList());
     }
 
-    public Teacher addTeacher(Teacher teacher) {return teacherRepository.save(teacher);}
+    public TeacherModel addTeacher(TeacherCreateModel teacherCreateModel) {
+        return Mapper.mapTeacherEntityToTeacherModel(teacherRepository.save(Mapper.mapTeacherCreateModelToTeacherEntity(teacherCreateModel)));
+        }
 
     public Teacher findTeachersById(Long id) {
         return teacherRepository.findTeachersById(id)
@@ -44,10 +54,10 @@ public class TeacherService {
         }
     }
 
-    public Teacher updateTeacher (Long id, Teacher updateTeacher) {
+    public Teacher updateTeacher (Long id, TeacherUpdateModel teacherUpdateModel) {
         Teacher teacher = findTeachersById(id);
-        teacher.setName(updateTeacher.getName());
-        teacher.setCourses(updateTeacher.getCourses());
-        return teacherRepository.save(updateTeacher);
+        teacher.setName(teacherUpdateModel.getName());
+        teacher.setCourses(teacherUpdateModel.getCourses());
+        return teacherRepository.save(teacher);
     }
 }
