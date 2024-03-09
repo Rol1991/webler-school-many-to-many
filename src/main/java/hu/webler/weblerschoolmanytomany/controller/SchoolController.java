@@ -1,8 +1,12 @@
 package hu.webler.weblerschoolmanytomany.controller;
 
 import hu.webler.weblerschoolmanytomany.entity.School;
+import hu.webler.weblerschoolmanytomany.model.SchoolCreateModel;
+import hu.webler.weblerschoolmanytomany.model.SchoolModel;
+import hu.webler.weblerschoolmanytomany.model.SchoolUpdateModel;
 import hu.webler.weblerschoolmanytomany.service.SchoolService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,16 +26,20 @@ public class SchoolController {
     private final SchoolService schoolService;
 
     @GetMapping("/schools")
-    public List<School> renderSchool() {
-        return schoolService.getSchool();
+    public ResponseEntity<List<SchoolModel>> renderAllSchools() {
+        return ResponseEntity.status(200).body(schoolService.getSchool());
     }
 
     @PostMapping("/schools")
-    public School addSchool(@RequestBody School school) {return schoolService.addSchool(school);}
+    public ResponseEntity<SchoolModel> createSchool(@RequestBody SchoolCreateModel schoolCreateModel) {
+        return ResponseEntity.status(200).body(schoolService.createSchool(schoolCreateModel));
+    }
 
     @DeleteMapping("/schools/{id}")
     public void deleteSchool(@PathVariable Long id) { schoolService.deleteSchool(id);}
 
     @PatchMapping("/schools/{id}")
-    public School patchSchool(@PathVariable Long id, @RequestBody School school) {return schoolService.updateSchool(id, school);}
+    public ResponseEntity<School> updateSchool(@PathVariable Long id, @RequestBody SchoolUpdateModel schoolUpdateModel) {
+        return ResponseEntity.status(200).body(schoolService.updateSchool(id, schoolUpdateModel));
+    }
 }
