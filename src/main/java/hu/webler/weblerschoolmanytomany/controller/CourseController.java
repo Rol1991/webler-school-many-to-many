@@ -32,12 +32,12 @@ public class CourseController {
     }
 
     @GetMapping("/courses/id")
-    public ResponseEntity<Course>  renderCoursesById(Long id) {
+    public ResponseEntity<Course>  renderCourseById(Long id) {
         return ResponseEntity.status(200).body(courseService.findCourseById(id));
     }
 
     @PostMapping("/courses")
-    public ResponseEntity<CourseModel> createNewCourse(@RequestBody CourseCreateModel courseCreateModel) {
+    public ResponseEntity<CourseModel> createCourse(@RequestBody CourseCreateModel courseCreateModel) {
         return ResponseEntity.status(200).body(courseService.createCourse(courseCreateModel));
     }
 

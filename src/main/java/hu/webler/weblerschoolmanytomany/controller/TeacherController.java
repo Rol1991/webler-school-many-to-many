@@ -26,12 +26,12 @@ public class TeacherController {
     private final TeacherService teacherService;
 
     @GetMapping("/teachers")
-    public ResponseEntity<List<TeacherModel>> renderAllTeachers() {
+    public ResponseEntity<List<TeacherModel>> renderAllTeacher() {
         return ResponseEntity.status(200).body(teacherService.getAllTeachers());
     }
 
     @PostMapping("/teachers")
-    public ResponseEntity<TeacherModel> createTeachers(@RequestBody TeacherCreateModel teacherCreateModel) {
+    public ResponseEntity<TeacherModel> createTeacher(@RequestBody TeacherCreateModel teacherCreateModel) {
         return ResponseEntity.status(200).body(teacherService.addTeacher(teacherCreateModel));
     }
 
@@ -42,5 +42,5 @@ public class TeacherController {
     }
 
     @PatchMapping("/teachers/{id}")
-    public Teacher patchTeacher(@PathVariable Long id, @RequestBody TeacherUpdateModel teacherUpdateModel) {return teacherService.updateTeacher(id, teacherUpdateModel);}
+    public Teacher updateTeacher(@PathVariable Long id, @RequestBody TeacherUpdateModel teacherUpdateModel) {return teacherService.updateTeacher(id, teacherUpdateModel);}
 }
