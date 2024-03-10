@@ -1,6 +1,5 @@
 package hu.webler.weblerschoolmanytomany.controller;
 
-
 import hu.webler.weblerschoolmanytomany.entity.Course;
 import hu.webler.weblerschoolmanytomany.model.CourseCreateModel;
 import hu.webler.weblerschoolmanytomany.model.CourseModel;
