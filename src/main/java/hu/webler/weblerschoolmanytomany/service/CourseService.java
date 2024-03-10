@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,14 +43,10 @@ public class CourseService {
     }
 
     public void deleteCourse(Long id) {
-        Optional<Course> course = courseRepository.findById(id);
-        if (course.isPresent()) {
-            courseRepository.deleteById(id);
+        findCourseById(id);
+        courseRepository.deleteById(id);
         }
-        String message = String.format("Course with id %d not found");
-        log.info(message);
-        throw new NoSuchElementException(message);
-    }
+
 
     public Course updateCourse(Long id, CourseUpdateModel courseUpdateModel) {
         Course course = findCourseById(id);

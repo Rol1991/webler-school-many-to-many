@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,19 +37,13 @@ public class TeacherService {
                 .orElseThrow( () -> {
                     String message = "Teacher with id %d not found" + id;
                     log.info(message);
-                    throw new NoSuchElementException(message);
+                    return new NoSuchElementException(message);
                 });
     }
 
     public void deleteTeacher(Long id) {
-        Optional<Teacher> teacher = teacherRepository.findById(id);
-        if (teacher.isPresent()) {
-            teacherRepository.deleteById(id);
-        } else {
-            String message = String.format("Teacher with id %d not found", id);
-            log.info(message);
-            throw new NoSuchElementException(message);
-        }
+        findTeacherById(id);
+        teacherRepository.deleteById(id);
     }
 
     public Teacher updateTeacher (Long id, TeacherUpdateModel teacherUpdateModel) {

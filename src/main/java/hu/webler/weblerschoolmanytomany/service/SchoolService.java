@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -45,14 +44,8 @@ public class SchoolService {
 
 
     public void deleteSchool(Long id) {
-        Optional<School> school = schoolRepository.findById(id);
-        if (school.isPresent()) {
-            schoolRepository.deleteById(id);
-        } else {
-            String message = String.format("School with id %d not found", id);
-            log.info(message);
-            throw  new NoSuchElementException(message);
-        }
+        findSchoolById(id);
+        schoolRepository.deleteById(id);
     }
 
     public School updateSchool(Long id, SchoolUpdateModel model) {

@@ -47,13 +47,8 @@ public class StudentService {
     }
 
     public void deleteStudents(long id) {
-        Optional<Student> student = studentRepository.findById(id);
-        if (student.isPresent()) {
-            studentRepository.deleteById(id);
-        }
-        String message = String.format("Student with id %d not found", id);
-        log.info(message);
-        throw new NoSuchElementException(message);
+        findStudentById(id);
+        studentRepository.deleteById(id);
     }
 
     public Student updateStudent(Long id, StudentUpdateModel model) {
