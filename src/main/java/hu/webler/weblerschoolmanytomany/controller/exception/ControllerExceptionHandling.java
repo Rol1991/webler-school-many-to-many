@@ -1,6 +1,6 @@
 package hu.webler.weblerschoolmanytomany.controller.exception;
 
-import hu.webler.weblerschoolmanytomany.service.CourseService;
+
 import hu.webler.weblerschoolmanytomany.value.ErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
