@@ -89,7 +89,6 @@ public class Mapper {
         School school = new School();
         school.setName(model.getName());
         school.setAddress(model.getAddress());
-        school.setCourses(model.getCourses());
         return school;
     }
 
