@@ -35,7 +35,7 @@ public class TeacherService {
     public Teacher findTeacherById(Long id) {
         return teacherRepository.findTeacherById(id)
                 .orElseThrow(() -> {
-                    String message = "Teacher with id %d not found" + id;
+                    String message = String.format("Teacher with id %d was not found", id);
                     log.info(message);
                     return new NoSuchElementException(message);
                 });
