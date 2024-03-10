@@ -1,6 +1,5 @@
 package hu.webler.weblerschoolmanytomany.util;
 
-
 import hu.webler.weblerschoolmanytomany.entity.Course;
 import hu.webler.weblerschoolmanytomany.entity.School;
 import hu.webler.weblerschoolmanytomany.entity.Student;
@@ -58,8 +57,6 @@ public class Mapper {
         student.setDateOffBirth(model.getDateOffBirth());
         return student;
     }
-
-
 
     public static TeacherModel  mapTeacherEntityToTeacherModel(Teacher teacher) {
         TeacherModel model = new TeacherModel();
